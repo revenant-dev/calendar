@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario</title>
+    <link rel="icon" type="image/x-icon" href="Calendario_favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -617,8 +618,8 @@
             closeEditSummaryModalBtn.addEventListener('click', () => editSummaryModal.classList.add('hidden'));
             cancelEditSummaryBtn.addEventListener('click', () => editSummaryModal.classList.add('hidden'));
             saveSummaryChangesBtn.addEventListener('click', saveSummaryChanges);
-            prevMonthBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); });
-            nextMonthBtn.addEventListener('click', () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); });
+            prevMonthBtn.addEventListener('click', () => { currentDate.setDate(1); currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); });
+            nextMonthBtn.addEventListener('click', () => { currentDate.setDate(1); currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); });
             todayBtn.addEventListener('click', () => { currentDate = new Date(); renderCalendar(); });
             prevYearBtn.addEventListener('click', () => { displayedYear--; renderYear(displayedYear, allFetchedEvents); });
             nextYearBtn.addEventListener('click', () => { displayedYear++; renderYear(displayedYear, allFetchedEvents); });
@@ -996,19 +997,14 @@
                 for (let day = 1; day <= daysInMonth; day++) {
                     const cellDate = new Date(year, month, day);
                     const dateKey = `${cellDate.getFullYear()}-${String(cellDate.getMonth() + 1).padStart(2, '0')}-${String(cellDate.getDate()).padStart(2, '0')}`;
-                    
                     const dayCell = document.createElement('div');
-                    dayCell.className = 'day-cell h-10 w-full relative rounded-md transition-colors duration-150 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 border border-transparent';
-                    
+                    dayCell.className = 'day-cell h-10 w-full flex items-center justify-center rounded-md transition-colors duration-150 relative cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
                     const dayNumberEl = document.createElement('span');
                     dayNumberEl.textContent = day;
-                    dayNumberEl.className = 'absolute top-0.5 right-1 text-xs font-medium'; 
+                    dayNumberEl.className = 'w-6 h-6 flex items-center justify-center rounded-full text-sm';
                     dayCell.appendChild(dayNumberEl);
-
-                    const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-
-                    if (isToday) {
-                        dayNumberEl.className = 'absolute top-0.5 right-1 w-5 h-5 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold text-xs';
+                    if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                        dayNumberEl.className += ' bg-blue-600 text-white font-bold';
                     } else {
                         const dayOfWeek = cellDate.getDay();
                         const formattedDateKey = `${String(cellDate.getMonth() + 1).padStart(2, '0')}-${String(cellDate.getDate()).padStart(2, '0')}`;
@@ -1018,21 +1014,13 @@
                             dayNumberEl.className += ' text-gray-700 dark:text-gray-300';
                         }
                     }
-                    
                     dayCell.addEventListener('click', () => handleDayClick(dateKey, dayCell));
-                    
                     if (yearProcessedEvents.has(dateKey)) {
                         const event = yearProcessedEvents.get(dateKey);
-                        const bgColor = eventTypeSettings[event.titolo] || '#E5E7EB';
-                        dayCell.style.backgroundColor = bgColor;
-                        
-                        if (!isToday) {
-                             dayNumberEl.style.color = getContrastingTextColor(bgColor);
-                        }
-
+                        dayCell.style.backgroundColor = eventTypeSettings[event.titolo] || '#E5E7EB';
                         if (event.descrizione && String(event.descrizione).trim() !== '') {
                             const descIndicator = document.createElement('div');
-                            descIndicator.className = 'absolute bottom-1 left-1 w-1.5 h-1.5 bg-gray-500/50 rounded-full';
+                            descIndicator.className = 'absolute top-1 right-1 w-1.5 h-1.5 bg-gray-500/50 rounded-full';
                             dayCell.appendChild(descIndicator);
                         }
                     }
