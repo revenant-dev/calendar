@@ -534,13 +534,7 @@
 
 
         // RIFERIMENTI HTML
-        let initialLoader, appContainer, errorContainer, monthlyView, annualView, summaryView, monthYearEl, calendarGridEl, prevMonthBtn, nextMonthBtn, todayBtn,
-            yearTitleEl, yearGrid, prevYearBtn, nextYearBtn, todayYearBtn, navigationButtonsMonth, managementButtonsMonth, cancelSelectionBtnMonth, proceedSelectionBtnMonth,
-            navigationButtonsYear, managementButtonsYear, cancelSelectionBtnYear, proceedSelectionBtnYear,
-            actionModal, actionStep1, actionStep2, actionLoadingState, selectedDatesCountEl, actionCancelBtn, actionDeleteBtn, actionEditBtn,
-            actionBackBtn, actionApplyBtn, eventTypeSelect, eventDescriptionInput, keepDescriptionCheckbox,
-            modal, modalTitle, modalDate, modalDescription, closeModalBtn,
-            summaryContent, summaryNotices, backToCalendarBtn, menuMonthBtn, menuMonthContent, menuYearBtn, menuYearContent;
+        let initialLoader, appContainer, errorContainer, monthlyView, annualView, summaryView, monthYearEl, calendarGridEl, prevMonthBtn, nextMonthBtn, todayBtn, yearTitleEl, yearGrid, prevYearBtn, nextYearBtn, todayYearBtn, navigationButtonsMonth, managementButtonsMonth, cancelSelectionBtnMonth, proceedSelectionBtnMonth, navigationButtonsYear, managementButtonsYear, cancelSelectionBtnYear, proceedSelectionBtnYear, actionModal, actionStep1, actionStep2, actionLoadingState, selectedDatesCountEl, actionCancelBtn, actionDeleteBtn, actionEditBtn, actionBackBtn, actionApplyBtn, eventTypeSelect, eventDescriptionInput, keepDescriptionCheckbox, modal, modalTitle, modalDate, modalDescription, closeModalBtn, summaryContent, summaryNotices, backToCalendarBtn, menuMonthBtn, menuMonthContent, menuYearBtn, menuYearContent, menuSummaryBtn, menuSummaryContent, editSummaryModal, editSummaryForm, editSummaryLoading, closeEditSummaryModalBtn, cancelEditSummaryBtn, saveSummaryChangesBtn, editSummaryButtons, settingsModal, closeSettingsModalBtn, settingsEventList, addEventTypeBtn, cancelSettingsBtn, saveSettingsBtn, settingsLoading, settingsButtons;
 
         function getElements() {
             initialLoader = document.getElementById('initial-loader');
@@ -909,7 +903,7 @@
                 if (cellDate.getMonth() !== month) {
                     cell.className = 'invisible';
                 } else {
-                    cell.className = 'day-cell relative flex items-center justify-center p-1 rounded-lg border border-transparent';
+                    cell.className = 'day-cell relative flex items-center justify-center p-1 rounded-lg border border-gray-200 dark:border-gray-700';
 
                     const dayNumber = document.createElement('span');
                     dayNumber.className = 'absolute top-1 right-2 font-medium text-gray-700 dark:text-gray-300';
@@ -997,7 +991,7 @@
                     const cellDate = new Date(year, month, day);
                     const dateKey = `${cellDate.getFullYear()}-${String(cellDate.getMonth() + 1).padStart(2, '0')}-${String(cellDate.getDate()).padStart(2, '0')}`;
                     const dayCell = document.createElement('div');
-                    dayCell.className = 'day-cell h-10 w-full flex items-center justify-center rounded-md transition-colors duration-150 relative cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
+                    dayCell.className = 'day-cell h-10 w-full flex items-center justify-center rounded-md border border-gray-200 dark:border-gray-700 transition-colors duration-150 relative cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
                     const dayNumberEl = document.createElement('span');
                     dayNumberEl.textContent = day;
                     dayNumberEl.className = 'w-6 h-6 flex items-center justify-center rounded-full text-sm';
