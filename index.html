@@ -78,7 +78,7 @@
             right: 0;
             bottom: 0;
             border: 3px solid #3b82f6;
-            border-radius: 0.5rem;
+            border-radius: 1rem;
             opacity: 0;
             transition: opacity 0.1s ease-in-out;
             pointer-events: none;
@@ -903,7 +903,7 @@
                 if (cellDate.getMonth() !== month) {
                     cell.className = 'invisible';
                 } else {
-                    cell.className = 'day-cell relative flex items-center justify-center p-1 rounded-lg border border-gray-200 dark:border-gray-700';
+                    cell.className = 'day-cell relative flex items-center justify-center p-1 rounded-2xl border border-gray-200 dark:border-gray-700';
 
                     const dayNumber = document.createElement('span');
                     dayNumber.className = 'absolute top-1 right-2 font-medium text-gray-700 dark:text-gray-300';
@@ -937,6 +937,8 @@
                             descIndicator.className = 'absolute bottom-1.5 left-1.5 w-1.5 h-1.5 bg-gray-500/50 rounded-full';
                             cell.appendChild(descIndicator);
                         }
+
+
                     } else {
                         cell.classList.add('bg-white', 'dark:bg-gray-800', 'border-gray-200', 'dark:border-gray-700');
                         const dayOfWeek = cellDate.getDay();
@@ -969,7 +971,7 @@
 
             for (let month = 0; month < 12; month++) {
                 const monthContainer = document.createElement('div');
-                monthContainer.className = 'bg-white dark:bg-gray-800 p-3 rounded-lg shadow-md';
+                monthContainer.className = 'bg-white dark:bg-gray-800 p-3 rounded-2xl shadow-md';
                 const monthName = new Date(year, month).toLocaleString('it-IT', { month: 'long' }).replace(/^\w/, c => c.toUpperCase());
                 const monthHeader = document.createElement('button');
                 monthHeader.className = 'w-full text-base font-semibold text-center mb-2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md text-gray-800 dark:text-gray-200 focus:outline-none';
@@ -991,7 +993,7 @@
                     const cellDate = new Date(year, month, day);
                     const dateKey = `${cellDate.getFullYear()}-${String(cellDate.getMonth() + 1).padStart(2, '0')}-${String(cellDate.getDate()).padStart(2, '0')}`;
                     const dayCell = document.createElement('div');
-                    dayCell.className = 'day-cell h-10 w-full flex items-center justify-center rounded-md border border-gray-200 dark:border-gray-700 transition-colors duration-150 relative cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
+                    dayCell.className = 'day-cell aspect-square w-full flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-700 transition-colors duration-150 relative cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
                     const dayNumberEl = document.createElement('span');
                     dayNumberEl.textContent = day;
                     dayNumberEl.className = 'w-6 h-6 flex items-center justify-center rounded-full text-sm';
